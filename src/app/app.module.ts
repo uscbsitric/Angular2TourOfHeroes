@@ -7,6 +7,7 @@ import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { HeroService }         from './hero.service';
 import { MessagesComponent } from './messages/messages.component';
 import { MessageService } from './message.service';
+import { AppRoutingModule } from './/app-routing.module';
  
 @NgModule({declarations: [AppComponent,
                           HeroesComponent,
@@ -14,7 +15,8 @@ import { MessageService } from './message.service';
                           MessagesComponent
                          ],
            imports: [BrowserModule,
-                     FormsModule
+                     FormsModule,
+                     AppRoutingModule
                     ],
            providers: [HeroService, MessageService, ], // The providers array tells Angular to create a single, 
                                                      // shared instance of HeroService and inject into any class that asks for it.
