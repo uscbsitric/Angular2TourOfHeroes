@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { MessageService } from '../message.service';
 
 @Component({selector: 'app-messages',
             templateUrl: './messages.component.html',
@@ -10,7 +11,9 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 export class MessagesComponent implements OnInit
 {
 
-  constructor()
+  // The messageService property must be public because you're about to bind to it in the template.
+  // Angular only binds to public component properties.
+  constructor(public messageService: MessageService)
   {
 
   }
