@@ -1,5 +1,6 @@
 import { NgModule }             from '@angular/core';
 import { HeroesComponent }      from './heroes/heroes.component';
+import { DashboardComponent }   from './dashboard/dashboard.component';
 
 
 // You'll configure the router with Routes in the RouterModule so import those two symbols from the @angular/router library.
@@ -7,6 +8,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [{path: 'heroes',
                          component: HeroesComponent
+                        },
+                        {path: 'dashboard',
+                         component: DashboardComponent
+                        },
+                        {path: '',
+                         redirectTo: '/dashboard',
+                         pathMatch: 'full'
                         }
                        ];
 
