@@ -1,9 +1,21 @@
 <h1>{{title}}</h1>
 
+
+<!-- Dashboard Navigational Link -->
+<nav>
+  <!--
+    The routerLink is the selector for the RouterLink directive that turns user clicks into router navigations. 
+    It's another of the public directives in the RouterModule. 
+  -->
+  <a routerLink="/dashboard">Dashboard</a>
+  <a routerLink="/heroes">Heroes</a>
+</nav>
+
 <!--
   You removed <app-heroes> because you will only display the HeroesComponent when the user navigates to it.
   The <router-outlet> tells the router where to display routed views.
-  The RouterOutlet is one of the router directives that became available to the AppComponent because AppModule imports AppRoutingModule which exported RouterModule.
+  The RouterOutlet is one of the router directives that became available to the AppComponent because AppModule 
+  imports AppRoutingModule which exported RouterModule.
 -->
 <router-outlet></router-outlet>
 <app-messages></app-messages>
