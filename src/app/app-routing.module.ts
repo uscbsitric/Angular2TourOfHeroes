@@ -1,20 +1,24 @@
 import { NgModule }             from '@angular/core';
 import { HeroesComponent }      from './heroes/heroes.component';
 import { DashboardComponent }   from './dashboard/dashboard.component';
+import { HeroDetailComponent }  from './hero-detail/hero-detail.component';
 
 
 // You'll configure the router with Routes in the RouterModule so import those two symbols from the @angular/router library.
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [{path: 'heroes',
+const routes: Routes = [{path: '',
+                        redirectTo: '/dashboard',
+                        pathMatch: 'full'
+                        },
+                        {path: 'heroes',
                          component: HeroesComponent
                         },
                         {path: 'dashboard',
                          component: DashboardComponent
                         },
-                        {path: '',
-                         redirectTo: '/dashboard',
-                         pathMatch: 'full'
+                        {path: 'detail/:id',  // a parameterized route, The colon (:) in the path indicates that :id is a placeholder for a specific hero id.
+                         component: HeroDetailComponent
                         }
                        ];
 

@@ -25,4 +25,16 @@ export class HeroService
     return of(HEROES);
   }
 
+  getHero(id: number): Observable<Hero>
+  {
+    // Note the backticks ( ` ) that define a JavaScript template literal for embedding the id.
+    // as per https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
+    // Template literals are string literals allowing embedded expressions.
+    // Template literals are enclosed by the back-tick (` `)  (grave accent) character instead of double or single quotes. 
+    // Template literals can contain placeholders. These are indicated by the dollar sign and curly braces (${expression}). 
+    this.messageService.add(`HeroService: fetched hero id=${id}`);
+
+    return of(HEROES.find(hero => hero.id === id));
+  }
+
 }
