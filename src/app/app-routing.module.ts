@@ -29,6 +29,14 @@ const routes: Routes = [{path: '',
                                                   // The method is called forRoot() because you configure the router at the application's root level. 
                                                   // The forRoot() method supplies the service providers and directives needed for routing, and performs 
                                                   // the initial navigation based on the current browser URL.
+
+                                                  /* https://stackoverflow.com/questions/39653072/how-to-use-forroot-within-feature-modules-hierarchy
+                                                     https://stackoverflow.com/questions/39664861/importing-modules-with-forroot
+                                                     forRoot is only used for the main app module. 
+                                                     It is a convention used so that only the app module gets application/singleton providers. 
+                                                     This is to avoid providers that are supposed to be singletons, 
+                                                     being created more than once for the application
+                                                  */
                     ],
            exports: [RouterModule, //  Exporting RouterModule makes router directives available for use in the AppModule components that will need them.
                     ]
