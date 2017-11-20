@@ -32,9 +32,16 @@ import { HttpClient } from '@angular/common/http/src/client';
                      HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService,
                                                             { dataEncapsulation: false }
                                                            )
+                                                    /* https://stackoverflow.com/questions/39653072/how-to-use-forroot-within-feature-modules-hierarchy
+                                                       https://stackoverflow.com/questions/39664861/importing-modules-with-forroot
+                                                       forRoot is only used for the main app module. 
+                                                       It is a convention used so that only the app module gets application/singleton providers. 
+                                                       This is to avoid providers that are supposed to be singletons, 
+                                                       being created more than once for the application
+                                                    */
                     ],
-           providers: [HeroService, MessageService, ], // The providers array tells Angular to create a single, 
-                                                     // shared instance of HeroService and inject into any class that asks for it.
+           providers: [HeroService, MessageService ],  // The providers array tells Angular to create a single, 
+                                                       // shared instance of HeroService and inject into any class that asks for it.
            bootstrap: [AppComponent]
           }
         )
