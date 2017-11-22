@@ -67,6 +67,9 @@ export class HeroService
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
+
+   // https://templecoding.com/blog/2016/03/17/leveraging-the-power-of-generics-with-typescript/
+   // the function handleError expects a parameter of type T and will return a value of the same type T, where T can be anything
    private handleError<T>(operation = 'operation', result?: T)
    {
      return (error: any): Observable<T> => { // TODO: send the error to remote logging infrastructure
@@ -81,4 +84,6 @@ export class HeroService
                                            };
    }
 
+   // basaha nig maau basta about generics in typescript
+   // https://templecoding.com/blog/2016/03/17/leveraging-the-power-of-generics-with-typescript/
 }
