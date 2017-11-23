@@ -9,6 +9,9 @@ import { catchError, map, tap }     from 'rxjs/operators'; // To catch errors, y
 import { MessageService }           from './message.service';
 import { HttpClient, HttpHeaders }  from '@angular/common/http';
 
+const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+                    };
+
 // The @Injectable() decorator tells Angular that this service might itself have injected dependencies.
 // It doesn't have dependencies now but applying the @Injectable() decorator from the start ensures
 // consistency and future proofing.
@@ -69,7 +72,29 @@ export class HeroService
 
   updateHero(hero: Hero):Observable<any>
   {
-    return this.http.put();
+    return this.http.put(this.heroesUrl, hero, httpOptions)
+                    .pipe( tap( () => this.log(`updated hero id = ${hero.id}`) ),
+                           catchError(this.handleError<any>('updateHero'))
+                         );
+  }
+
+  addHero(hero: Hero): Observable<Hero>
+  {
+    return this.http.post<Hero>(this.heroesUrl, hero, httpOptions)
+                    .pipe( tap((hero: Hero) => this.log(`added hero with id=${hero.id}`)),
+                           catchError( this.handleError<Hero>('addHero') )
+                         );
+  }
+
+  deleteHero(hero: Hero | number): Observable<Hero>
+  {
+    const id = typeof hero === 'number' ? hero : hero.id;
+    const url = `${this.heroesUrl}/${id}`;
+
+    return this.http.delete<Hero>(url, httpOptions)
+                    .pipe(tap(_ => this.log(`deleted hero id=${id}`)),
+                          catchError(this.handleError<Hero>('deleteHero'))
+                         );
   }
 
 

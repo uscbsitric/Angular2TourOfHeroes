@@ -5,5 +5,29 @@
     <a routerLink="/detail/{{hero.id}}">
       <span class="badge">{{hero.id}}</span> {{hero.name}}
     </a>
+
+    <button class="delete" title="delete Hero"
+            (click)="delete(hero)"
+    >
+      x
+    </button>
   </li>
 </ul>
+
+<div>
+  <label>
+    Hero Name:
+    <input #heroName /> <!-- template reference variable
+                             There's another way to get the user data: use Angular template reference variables.
+                             These variables provide direct access to an element from within the template.
+                             To declare a template reference variable, precede an identifier with a hash (or pound) character (#).
+                         -->
+  </label>
+
+  <!-- (click) passes input value to add() and then clears the input -->
+
+  <button (click)="add(heroName.value); heroName.value=''" >
+    add
+  </button>
+
+</div>
