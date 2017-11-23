@@ -34,8 +34,16 @@ export class HeroService
     The shape of the JSON data is determined by the server's data API. 
     The Tour of Heroes data API returns the hero data as an array.
     */
+    //  type specifier, <Hero[]>
     return this.http.get<Hero[]>(this.heroesUrl)
-                    .pipe(catchError( this.handleError('getHeroes', []) ) // The catchError() operator intercepts an Observable that failed. 
+                    .pipe( /*The HeroService methods will tap into the flow of observable values and send a message (via log()) to the 
+                             message area at the bottom of the page.
+                             They'll do that with the RxJS tap operator, which looks at the observable values, 
+                             does something with those values, and passes them along. 
+                             The tap call back doesn't touch the values themselves.
+                           */
+                          tap(heroes => this.log(`fetched heroes`)),
+                          catchError( this.handleError('getHeroes', []) ) // The catchError() operator intercepts an Observable that failed. 
                                                                           // It passes the error an error handler that can do what it wants 
                                                                           // with the error.
                          );
@@ -48,9 +56,20 @@ export class HeroService
     // Template literals are string literals allowing embedded expressions.
     // Template literals are enclosed by the back-tick (` `)  (grave accent) character instead of double or single quotes. 
     // Template literals can contain placeholders. These are indicated by the dollar sign and curly braces (${expression}). 
-    this.messageService.add(`HeroService: fetched hero id=${id}`);
+    //this.messageService.add(`HeroService: fetched hero id=${id}`);
     const url = `${this.heroesUrl}/${id}`;
-    return this.http.get<Hero>(url);
+
+    return this.http.get<Hero>(url)
+                    .pipe(
+                           tap(_ => this.log(`fetched hero id=${id}`) ),
+                           catchError( this.handleError<Hero>(`getHero id=${id}`) )
+                         );
+  }
+
+
+  updateHero(hero: Hero):Observable<any>
+  {
+    return this.http.put();
   }
 
 
@@ -78,8 +97,10 @@ export class HeroService
                                              // TODO: better job of transforming error for user consumption
                                              this.log(`${operation} failed: ${error.message}`);
 
-
                                              // Let the app keep running by returning an empty result.
+                                             // Creates an Observable that emits some values you specify as arguments, 
+                                             // immediately one after the other, and then emits a complete notification.
+                                             // http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#static-method-of
                                              return of(result as T);
                                            };
    }
