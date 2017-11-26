@@ -14,12 +14,14 @@ import { HttpClientModule }    from '@angular/common/http'; // HttpClient is Ang
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }            from './in-memory-data.service';
 import { HttpClient } from '@angular/common/http/src/client';
+import { HeroSearchComponent } from './hero-search/hero-search.component';
  
 @NgModule({declarations: [AppComponent,
                           HeroesComponent,
                           HeroDetailComponent,
                           MessagesComponent,
-                          DashboardComponent
+                          DashboardComponent,
+                          HeroSearchComponent
                          ],
            imports: [BrowserModule,
                      FormsModule,
